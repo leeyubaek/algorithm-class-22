@@ -9,8 +9,21 @@
 #  - q 또는 quit 입력 시 종료
 #############################################################################
 
+def factorial_iter(n):
+    #반복문 기반 n! 계산
+    result = 1
+    for k in range(2, n+1) :
+        result *= k
+    return result
+    
+    
+def factorial_rec(n):
+    #재귀 호출 기반 n!
+    if n == 1 :
+        return 1
+    return n * factorial_rec(n-1)
 
-
+    
 if __name__ == "__main__":
     n = int(input("\n정수를 입력하세요: ").strip())
     print(f"반복문 기반: {factorial_iter(n)}")
