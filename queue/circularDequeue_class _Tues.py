@@ -16,11 +16,48 @@
 # - 덱의 후단 : add_rear, delete_rear, get_rear 연산은 각각 스택의 push, pop, peek과 동일
 # - 덱의 add_front, delete_rear, get_rear 연산은 별도 구현 필요
 
-   
+from circular_queue_class import CircularQueueOneSlotEmpty
 
+class CircularDeque(CircularQueueOneSlotEmpty):
+    def __init__(self, capacity):
+        super().__init__(capacity)
+    
+    """
+    self.is_empty(), self.is_full(), self.size(), self.display()
+    위의 연산들: 상속을 통해 그대로 사용
+    """
+    def delete_front(self): # 전단에서 삭제
+        return self.dequeue() # 부모 메서드 호출
+    
+    def get_front(self): # 전단에서 검색
+        return self.peek() # 부모 메서드 호출
+    
+    def add_rear(self, item): # 후단에서 삽입
+        return self.enqueue(item) # 부모 메서드 호출
 
+    # Dequeue에만 있는 연산 : 자식 클래스에서 구현
 
-
+    def add_front(self,item): # 전단에서 삽입
+        if self.is_full():
+            raise IndexError("덱이 포화 상태 -> 삽입 불가")
+        else:
+            self.array[self.front] = item
+            self.front = (self.front - 1) % self.N # front 를 반시계반향으로 한 칸 회전
+    
+    def delete_rear(self): # 후단에서 삭제
+        if self.is_empty():
+            raise IndexError("덱이 빈 상태 -> 삭제 불가")
+        else:
+            item = self.array[self.rear] # rear 포인터는 마지막 요소를 가리킴
+            self.array[self.rear] = None
+            self.rear = (self.rear - 1) % self.N
+            return item # 반환
+        
+    def get_rear(self): # 후단에서 최근 자료 검색
+        if self.is_empty():
+            raise IndexError("덱이 포화 상태 -> 삽입 불가")
+        else:
+            return self.array[self.rear] # 바로 rear 위치
 
 #===============================
 # 링버퍼 테스트 프로그램
