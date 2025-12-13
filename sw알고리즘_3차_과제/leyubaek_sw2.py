@@ -1,6 +1,5 @@
-# 0/1 Knapsack Problem - Bottom-up DP + Backtracking
 
-def knapSack_dp(W, wt, val, n):
+def TravelPacking_dp(W, wt, val, n):
     A = []
     for i in range(n + 1):
         row = []
@@ -38,7 +37,7 @@ print("<입력>")
 W = int(input("배낭 용량을 입력 하세요 : "))
 print("<프로그램 실행>")
 # DP 실행
-max_value, A = knapSack_dp(W, wt, val, n)
+max_value, A = TravelPacking_dp(W, wt, val, n)
 print("최대 만족도 =", max_value)
 
 
